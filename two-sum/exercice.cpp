@@ -16,12 +16,13 @@ public:
             int remainder = target - nums[i];
             auto result = dict.find(remainder);
 
-            cout << (result == dict.end()) << endl;
-
             if (result != dict.end() && result->second != i) {
                 return vector<int> ({i, result->second});
             }
         }
+
+        // it should never reach here.
+        // according to program specs, there's always an answer.
         return vector<int> ({-1, -1});
     }
 };

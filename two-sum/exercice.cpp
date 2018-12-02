@@ -11,7 +11,6 @@ public:
         map<int, int> dict;
 
         for (int i = 0; i < nums.size(); i++) {
-            dict[nums[i]] = i;
 
             int remainder = target - nums[i];
             auto result = dict.find(remainder);
@@ -19,6 +18,8 @@ public:
             if (result != dict.end() && result->second != i) {
                 return vector<int> ({i, result->second});
             }
+
+            dict[nums[i]] = i;
         }
 
         // it should never reach here.

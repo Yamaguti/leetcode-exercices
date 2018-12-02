@@ -8,7 +8,30 @@ using namespace std;
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> merged;
 
+        // merge like
+        for (int i = 0, j = 0; i + j < nums1.size() + nums2.size(); ) {
+            bool isSecondVectorConsumed = j >= nums2.size();
+            bool isFirstVectorConsumed = i >= nums1.size();
+
+            if (isSecondVectorConsumed || (!isFirstVectorConsumed && nums1[i] <= nums2[j])) {
+                merged.push_back(nums1[i]);
+                i++;
+            } else {
+                merged.push_back(nums2[j]);
+                j++;
+            }
+        }
+
+
+        if (merged.size() % 2 == 0) {
+            int index = merged.size()/2;
+            return (merged[index] + merged[index-1])/2.f;
+        } else {
+            int index = merged.size()/2;
+            return merged[index];
+        }
     }
 };
 

@@ -7,31 +7,77 @@ using namespace std;
 
 class Solution {
 public:
-    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        vector<int> merged;
 
-        // merge like
-        for (int i = 0, j = 0; i + j < nums1.size() + nums2.size(); ) {
-            bool isSecondVectorConsumed = j >= nums2.size();
-            bool isFirstVectorConsumed = i >= nums1.size();
+    int binarySearchIndex(vector<int>& vec, int value) {
+        int i = 0;
+        int j = vec.size() - 1;
 
-            if (isSecondVectorConsumed || (!isFirstVectorConsumed && nums1[i] <= nums2[j])) {
-                merged.push_back(nums1[i]);
-                i++;
+        while (1) {
+            if (i == j || i == j-1 || i > j) return i;
+            int k = (i + j)/2;
+
+            if (vec[k] < value) {
+                i = k;
+            } else if (vec[k] > value) {
+                j = k;
             } else {
-                merged.push_back(nums2[j]);
-                j++;
+                return k;
+            }
+        }
+    }
+
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+
+        int AmountNumbersSmallerThanI = 0;
+        int AmountNumbersSmallerThanJ = 0;
+
+        int m = nums1.size();
+        int n = nums2.size();
+
+        int i = 0;
+        int final_i = m-1;
+
+        int j = 0;
+        int final_j = n-1;
+
+        while(1) {
+            int mid_i = (i + final_i)/2;
+            int mid_j = (j + final_j)/2;
+
+            if (mid_i < m) {
+                AmountNumbersSmallerThanI = m - mid_i;
+                AmountNumbersSmallerThanI += binarySearchIndex(nums2, nums1[mid_i]);
+            }
+
+            if (mid_j < n) {
+                AmountNumbersSmallerThanJ = n - mid_j;
+                AmountNumbersSmallerThanJ += binarySearchIndex(nums1, nums2[mid_j]);
+            }
+
+            // breaking conditions
+            if (AmountNumbersSmallerThanI == (n + m)/2) {
+                cout << "here" << endl;
+                return nums1[mid_i];
+            } else if (AmountNumbersSmallerThanJ == (n + m)/2) {
+                cout << "there" << endl;
+                return nums2[mid_j];
+            }
+
+            // binary search update
+            if (AmountNumbersSmallerThanI > (n + m)/2) {
+                final_i = mid_i;
+            } else {
+                i = mid_i;
+            }
+
+            if (AmountNumbersSmallerThanJ > (n + m)/2) {
+                final_j = mid_j;
+            } else {
+                j = mid_j;
             }
         }
 
-
-        if (merged.size() % 2 == 0) {
-            int index = merged.size()/2;
-            return (merged[index] + merged[index-1])/2.f;
-        } else {
-            int index = merged.size()/2;
-            return merged[index];
-        }
+        return 0.f;
     }
 };
 

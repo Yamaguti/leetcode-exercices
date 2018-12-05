@@ -44,6 +44,10 @@ public:
             int mid_i = (i + final_i)/2;
             int mid_j = (j + final_j)/2;
 
+            cout << "here we are again" << endl;
+            cout << "mid_i: " << mid_i << endl;
+            cout << "mid_j: " << mid_j << endl;
+
             if (mid_i < m) {
                 AmountNumbersSmallerThanI = m - mid_i;
                 AmountNumbersSmallerThanI += binarySearchIndex(nums2, nums1[mid_i]);
@@ -55,10 +59,17 @@ public:
             }
 
             // breaking conditions
-            if (AmountNumbersSmallerThanI == (n + m)/2) {
+            if (AmountNumbersSmallerThanI == (n + m)/2 && mid_i < m) {
                 cout << "here" << endl;
+                cout << mid_i << endl;
+
+                std::stringstream res;
+                std::copy(nums1.begin(), nums1.end(), std::ostream_iterator<int>(res, " "));
+                cout << res.str() << endl;
+                cout << "done" << endl;
+
                 return nums1[mid_i];
-            } else if (AmountNumbersSmallerThanJ == (n + m)/2) {
+            } else if (AmountNumbersSmallerThanJ == (n + m)/2 && mid_j < n) {
                 cout << "there" << endl;
                 return nums2[mid_j];
             }

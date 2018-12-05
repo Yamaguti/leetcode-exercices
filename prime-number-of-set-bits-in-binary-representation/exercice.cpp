@@ -5,21 +5,17 @@ using namespace std;
 
 
 class Solution {
-    // value is garanteed to be less than 19 due to problem constraints
     bool isPrime(int value) {
-        switch(value) {
-            case 2:
-            case 3:
-            case 5:
-            case 7:
-            case 11:
-            case 13:
-            case 17:
-            case 19:
-                return true;
+        if (value == 1 || (value != 2 && value % 2 == 0))
+            return false;
+
+        for (int test = 3; test < value; test+=2) {
+            if (value % test == 0) {
+                return false;
+            }
         }
 
-        return false;
+        return true;
     }
 
     int getAmountOnesOnBinaryConversion(int value) {

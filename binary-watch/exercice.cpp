@@ -15,9 +15,11 @@ int main() {
     getline(cin, line);
 
     vector<string> result = Solution().readBinaryWatch(stoi(line));
-    for (auto s = result.begin(); s != result.end(); s++) {
+    for (auto s = result.begin(); s != result.end(); ++s) {
         cout << *s;
     }
+
+    cout << endl;
 
     return 0;
 }

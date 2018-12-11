@@ -20,10 +20,10 @@ public:
             v.push_back(i->val);
         }
 
-        int prefix = 0, postfix = v.size()
+        int prefix = 0, postfix = v.size();
 
         while (prefix < postfix) {
-            if (v[i] != v[j]) {
+            if (v[prefix] != v[postfix]) {
                 return false;
             }
             postfix--;

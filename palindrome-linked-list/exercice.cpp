@@ -14,7 +14,23 @@ struct ListNode {
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        return false;
+        std::vector<int> v;
+
+        for (ListNode *i = head; i != NULL; i = i->next) {
+            v.push_back(i->val);
+        }
+
+        int prefix = 0, postfix = v.size()
+
+        while (prefix < postfix) {
+            if (v[i] != v[j]) {
+                return false;
+            }
+            postfix--;
+            prefix++;
+        }
+
+        return true;
     }
 };
 

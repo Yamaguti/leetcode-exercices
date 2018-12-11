@@ -1,3 +1,9 @@
+#include<vector>
+#include<sstream>
+#include<iostream>
+
+using namespace std;
+
 class Solution {
 public:
     bool checkPossibility(vector<int>& nums) {

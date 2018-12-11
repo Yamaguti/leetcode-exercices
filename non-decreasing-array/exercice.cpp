@@ -6,37 +6,26 @@ using namespace std;
 
 class Solution {
 public:
-    bool isNonDecreasing(vector<int> v) {
-        for (int i = 0; i < v.size()-1; i++) {
-            if (v[i] > v[i+1]) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     bool checkPossibility(vector<int>& nums) {
-        if (isNonDecreasing(nums)) {
-            return true;
-        }
+        bool problem_found = false;
+        int problem = -1;
 
-        for (int i = 0; i < nums.size() - 1; i++) {
-            int aux = nums[i];
-            nums[i] = nums[i+1];
-            if (isNonDecreasing(nums)) {
-                return true;
-            } else {
-                nums[i] = aux;
+        for (int i = 0; i < nums.size() -1; i++) {
+            if (nums[i] > nums[i+1]) {
+                if (problem_found) {
+                    return false;
+                } else {
+                    problem_found = true;
+                    problem = i;
+                }
             }
         }
 
-        nums[nums.size()-1] = nums[nums.size()-2];
-        if (isNonDecreasing(nums)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (not problem_found)
+        or (problem == 0)
+        or (problem == nums.size()-2)
+        or (nums[problem-1] <= nums[problem+1])
+        or (nums[problem] <= nums[problem+2]);
     }
 };
 

@@ -30,6 +30,7 @@ public:
         //     }
         // }
 
+        // approach O(1) Space, O(N) time complexity
         int amountZerosAfterIndex = amountOfInSubArray(S, 0, S.size(), '0');
         int amountOnesBeforeIndex = 0;
         int answer;
